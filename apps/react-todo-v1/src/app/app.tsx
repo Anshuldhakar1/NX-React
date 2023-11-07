@@ -11,16 +11,13 @@ export interface Todo {
 export function App() {
 
   const [inp, setInp] = useState<string>('');
-  const [todos, setTodos] = useState<Todo[]>([]);
+  const [todos, setTodos] = useState<Todo[]>(() => {
+    const storageData = localStorage.getItem('todos');
+    return storageData ? JSON.parse(storageData) : [];
+  });
+
 
   const inpRef = useRef<HTMLInputElement>(null);
-
-  useEffect(() => { 
-    const storaegeData = localStorage.getItem('todos');
-    if (storaegeData) {
-      setTodos( () => JSON.parse(storaegeData));
-    }
-  },[])
 
   useEffect(() => { 
     localStorage.setItem('todos', JSON.stringify(todos));
@@ -66,10 +63,13 @@ export function App() {
         </div>
         <div className="todo-wrapper">
           {todos.length === 0 ? 
-            <h2 className={styles['no-todo']}>No Todos <span role='img' aria-label='worried'>😥</span></h2>
-            : todos.map((todo) => (
+            <h2 className={styles['no-todo']}>
+              No Todos <span role='img' aria-label='worried'>😥</span>
+            </h2>
+            :
+            todos.map((todo) => (
                 <div key={todo.value} className={ styles['todo-item']}>
-                  <input id={todo.value} type="checkbox" onClick={() => handleTodoClick(todo) } checked={todo.done} />
+                  <input id={todo.value} type="checkbox" onChange={() => handleTodoClick(todo) } checked={todo.done} />
                   <label htmlFor={todo.value}>{todo.value}</label>
               </div>
             ))}
