@@ -66,7 +66,8 @@ export function App() {
         </div>
         <div className="todo-wrapper">
           {todos.length === 0 ? 
-            <h2 className={ styles['no-todo']}>No Todos 😥</h2> : todos.map((todo) => (
+            <h2 className={styles['no-todo']}>No Todos <span role='img' aria-label='worried'>😥</span></h2>
+            : todos.map((todo) => (
                 <div key={todo.value} className={ styles['todo-item']}>
                   <input id={todo.value} type="checkbox" onClick={() => handleTodoClick(todo) } checked={todo.done} />
                   <label htmlFor={todo.value}>{todo.value}</label>
