@@ -16,7 +16,6 @@ export function App() {
     return storageData ? JSON.parse(storageData) : [];
   });
 
-
   const inpRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => { 
@@ -50,6 +49,14 @@ export function App() {
     );
   }
 
+  function handleDelete(todoToDelete: Todo) { 
+    setTodos(
+      (prev: Todo[]) => { 
+        return prev.filter((todo) => todo.value !== todoToDelete.value);
+      }
+    );
+  }
+
   const outerWrapper = styles['outer-wrapper'];
 
   return (
@@ -59,7 +66,7 @@ export function App() {
         <hr />
         <div className={styles['input-wrapper']}>
           <input ref={inpRef} type="text" onChange={handleInputChange} placeholder="New task name" />
-          <button type='submit' onClick={() => { handleAddTodo() } }>Add Task</button>
+          <button type='submit' className={styles['btn']} onClick={() => { handleAddTodo() } }>Add Task</button>
         </div>
         <div className="todo-wrapper">
           {todos.length === 0 ? 
@@ -71,6 +78,9 @@ export function App() {
                 <div key={todo.value} className={ styles['todo-item']}>
                   <input id={todo.value} type="checkbox" onChange={() => handleTodoClick(todo) } checked={todo.done} />
                   <label htmlFor={todo.value}>{todo.value}</label>
+                  <span className={styles['del-wrapper']}>
+                  <button className={styles['btn']} onClick={() => handleDelete(todo) }>Delete </button>
+                  </span>
               </div>
             ))}
         </div>

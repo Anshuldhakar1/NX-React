@@ -2,7 +2,7 @@
     display: flex;
     justify-content: center;
     width: 100vw;
-    height: 100vh;
+    min-height: 100vh;
 }
 
 h1 {
@@ -10,7 +10,7 @@ h1 {
 }
 
 .app-wrapper {
-    margin-top: 5%;
+    margin-block: 5%;
     min-width: 30%;
 }
 
@@ -33,13 +33,18 @@ h1 {
     flex-grow: 1;
 }
 
-.input-wrapper button {
+.btn {
     padding: .5rem;
     border: 1px solid rgba(0, 0, 0, 0.5);
     border-radius: 5px;
     background-color: #fff;
     cursor: pointer;
-    transition: all .2s ease-in-out;
+    transition: all .1s ease-in-out;
+}
+
+.btn:active, .btn:focus, .btn:focus-visible {
+    border-color: #999;
+    box-shadow: 0px 0px 0px 1px #ffffff, 0px 0px 1px 4px #999;
 }
 
 .todo-item {
@@ -53,6 +58,12 @@ h1 {
 
 .todo-item label {
     position: relative;
+    flex-grow: 1;
     top: -1px;
-    left: .5rem;
+    margin-left: .5rem;
+}
+
+.del-wrapper {
+    display: flex;
+    flex-direction: row-reverse;
 }
