@@ -61,6 +61,11 @@ h1 {
     flex-grow: 1;
     top: -1px;
     margin-left: .5rem;
+    user-select: none;
+}
+
+.todo-item input, .todo-item label {
+    cursor: pointer;
 }
 
 .del-wrapper {
