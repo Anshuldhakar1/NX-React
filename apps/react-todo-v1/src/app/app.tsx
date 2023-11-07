@@ -82,11 +82,8 @@ export function App() {
       }
     );
   }
-
-  const outerWrapper = styles['outer-wrapper'];
-
   return (
-    <div className={outerWrapper}>
+    <div className={styles['outer-wrapper']}>
       <div className={styles['app-wrapper']}>
         <h1>Todo List</h1>
         <hr />
